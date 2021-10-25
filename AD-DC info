@@ -1,0 +1,36 @@
+1-Contains the NTDS.dit - a database that contains all of the information of an Active Directory domain controller as well as password hashes for domain users
+2-Stored by default in %SystemRoot%\NTDS
+3-accessible only by the domain controller
+
+Forest is a collection of one or more domain trees inside of an Active Directory network. It is what categorizes the parts of the network as a whole.
+
+The Forest consists of these parts which we will go into farther detail with later:
+        Trees - A hierarchy of domains in Active Directory Domain Services
+        Domains - Used to group and manage objects 
+        Organizational Units (OUs) - Containers for groups, computers, users, printers and other OUs
+        Trusts - Allows users to access resources in other domains
+        Objects - users, groups, printers, computers, shares
+        Domain Services - DNS Server, LLMNR, IPv6
+        Domain Schema - Rules for object creation
+
+Domain Trusts Overview -
+
+Trusts are a mechanism in place for users in the network to gain access to other resources in the domain. For the most part, trusts outline the way that the domains inside 
+of a forest communicate to each other, in some environments trusts can be extended out to external domains and even forests in some cases.
+
+There are two types of trusts that determine how the domains communicate. I'll outline the two types of trusts below: 
+
+      Directional - The direction of the trust flows from a trusting domain to a trusted domain
+      Transitive - The trust relationship expands beyond just two domains to include other trusted domains The type of trusts put in place determines how the domains and
+                   trees in a forest are able to communicate and send data to and from each other when attacking an Active Directory environment you can sometimes abuse 
+                   these trusts in order to move laterally throughout the network. 
+
+Digitally Sign Communication (Always) - Can disable or enable SMB signing on the domain controller
+
+Windows Server AD	Azure AD
+LDAP			Rest APIs
+NTLM			OAuth/SAML
+Kerberos		OpenID
+OU Tree			Flat Structure
+Domains and Forests	Tenants
+Trusts			Guests
