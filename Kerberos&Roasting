@@ -1,0 +1,50 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HOW KERBEROS WORKS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kerberos REAL is a DOMAIN can have multiple domains
+Kerberos has three parts: a client, server, and trusted third party (KDC)"AD"
+Kerberos builds on "SYMMETRIC-KEY" cryptography and requires a trusted third party, and optionally may use public-key cryptography during certain phases of authentication
+
+1 - CLIENT authen to DC : Authentication request is encrypted w/ user key(passwd) - req has some clear txt to help DC identify User(timestamps are in req)
+2 - DC gets req & see's if it has the CLIENTS key in DB. if DC can decrypt the req (w/ it's copy of the clients key) DC knows the CLIENT is legitimate
+3 - DC grants CLIENT w/ TGT (ticket granting ticket), DC encrypts the TGT w/ it's Key & sends it to the CLIENT
+4 - CLIENT stores TGT in Memory called "KERB TRAY" (in Volatile Mem so if can be erased after reboor/ computer crashes)
+5 - CLIENT wants access to FILE server, CLIENT looks to see if it has a TGS (tickt granting servcies) in kerb tray, IF NOT, the CLIENT sends a COPY of TGT w/ reqs to access 
+          FILE server to DC
+6 - DC uses Key to decrypt TGT, if legit, DC creates a TGS w\ all CLIENTS permisions for the FILE server. THEN encrypts TGS w/ FILE servers key & sends to CLIENT
+7 - CLIENT stores TGS in kerb tray
+8 - IF CLIENT wants access to FILE server, it sends a COPY of the TGS to FILE server
+9 - FILE server Decrypts TGS w/ it's Key, if successfull GRANTS ACCESS to CLIENT, & FILE server opens up TGS to limit CLIENT on what access it has
+
+NOTE: - EVERY TIME CLIENT wants access to FILE servers, it has to send a COPT of TGS EVERYTIME due to FILE server memory constraints
+      - ALL TGT's by default last 8 Hrs
+      
+TOOL "KerbTray" will show all tickets on your computers RAM
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HOW KERBEROASTING WORKS  GREAT WAY To Escalate Priveleges
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kerberoasting: 
+                    Attacks SERVICE accounts
+                    You can identify SERVICE accounts w/ out priveleges 
+                    All SERVICE accounts have SPN (Service Principal Name) attribute that connects to a service in AD 
+ 
+1 - Query s DC to get all SERVICE acocunts (like file servers) in AD that have SPN registered
+          .\GetUserSPN.ps1
+                    ----> ServicePrincipalName: MSSQLSvc/ a-sql02.ur.domain.net:1433
+                          Name:.....
+                          SAM Account:...
+                          
+2a - Use PS to Reqs. a SERVICE ticket from AD
+          .\.ps1 
+                    ---> SPN: MSSQL/ .................:1443
+                         SecurityKey: System.Identity.Model.Tokens.InMemorySymmetricSecurityKey    <---- "InMemory"
+                         
+2b - Now SERVICE Ticket is in Memory in Kerbtray" - It's encrypted w\ SQL Servers NTLM Hash (aka passwd aka key) 
+3 - use Mimikat to dump ticket to disk, take compute offline and crack ticket (or can paas the hash)
+
+**This works because DC by default uses weak cipher RC4 encryption- this can be cracked***
+
+RC4 is a stream cipher Dev 1987 (Ron's Code)
+                    
+LOOKUP - Computer accounts end in $ and are more secure and rotate frequently                    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------

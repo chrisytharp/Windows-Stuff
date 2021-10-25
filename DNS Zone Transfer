@@ -1,0 +1,32 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------
+DNS enumeration"aka DNS Interegation" and zone transfers
+--------------------------------------------------------------------------------------------------------------------------------------------------
+looking for important records that will help you lay out the structure of the target domain "mysite.com"
+look for records that will reveal: mail servers, subdomains, hidden mail servers, etc..
+best way to get this info is through DNS enumeration and then performing ZONE transfers (if you have the ability to do this)
+
+DNS enumeration: is process of querying records of domain
+ZONE transfers : are a legitimate technique used by DNS server admins where you can copy the records of a PRIMARY Nameserver to a SECONDARY Name server "this is a great way of 
+                 ensuring their is redundancy"
+
+ATTACKERS exploit this because of the DNS server mis-configurations, they copy the records of the PRIMARY Name server to an unauthorized server - where attackers get the 
+                   entire infrastructure of IP address, domains, sub domain, mail servers, etc...
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+TOOLS:  Host , dig , NSlookup
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+linux has a tool called "host" BUT can also use "DIG" tool 
+#whatis host              ---DNS lookup utility
+#whatis dig               ---DNS lookup utility
+
+#host mysite.com          ---this does a simple lookup of mail & name servers
+#host -t                  --- to specify type (SEE SCREENSHOT)
+#host -t ns mysite.com    --- shows us all name swervers "priority is Top Down"
+#dig -t ns mysite.com     --- shows us all name swervers "priority is Top Down"
+---------------------------------------------------------------------------------------------------------------------------------------------------
+CAN use PRIMARY and SECONDARY Name Servers to complete a ZONE Transfer 
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+#dig axfr mysite.com @ns1.primary..com    ---- put in primary /or/ secondary NameServer found after the "@" symbol
+                                          ---- will print out EVERY RECORD FOUND even EXTERNAL & INTERNAL IPs

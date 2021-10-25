@@ -1,0 +1,66 @@
+dig mystie.com A
+dig myssite.com ANY
+dig mysite.com  MX
+dig mysite.com TXT
+dig mysite.com +trace
+dig -x 8.8.8.8 
+dig @8.8.4.4 mysite.com 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+A           – Address record which directly maps a hostname to an IP address
+PTR         - "use -x" to get reverse DNS "IP to hostname"
+AAAA        - hostname to IPV6 address
+MX          – Mail Exchange which maps message transfer agents for the domain
+SIG         – Signature record which is used in encryption protocols
+CNAME       - Canonical Name - means {www.site.com is the same as mysite.com} &&& then {mysite.com points to IP} 
+              Allows you to dig out IP address for subdomains
+SPF Record  -  (Sender Policy Framework) record is a type of TXT record in your DNS zone file. SPF records help identify which mail servers are permitted to send email on behalf                 of your domain. Adding an SPF record can help detect and prevent spammers from sending email messages with forged From addresses on your domain.
+SOA         - A Start of Authority record (abbreviated as SOA record) is a type of resource record in the Domain Name System (DNS) containing administrative information about                  the zone, especially regarding zone transfers.
+TXT         - https://support.google.com/a/answer/2716800?hl=en
++trace      - "#dig mysite.com +trace" Will go through all show all "servers" it hits on the way to final destination
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+imap        -IMAP is one of the most common protocols for receiving email. IMAP syncs messages across all devices.
+SMTP        -SMTP is the industry standard protocol for sending email
+POP3        -POP3 is another protocol for receiving email on a single device. Using POP3 means that your email will be accessible offline and deleted from the server.
+
+SMTP (sending mail)	Encrypted   - PORT  465
+SMTP (sending mail)	Unencrypted	- PORT  25 (or 26)
+POP3 (receiving mail)	Encrypted - PORT	995
+POP3 (receiving mail)	Unencrypted	PORT  110
+IMAP (receiving mail)	Encrypted - PORT	993
+IMAP (receiving mail)	Unencrypted	PORT  143
+--------------------------------------------------------------------------------------------------------------------------------------------------
+    DIG        COMMAND
+--------------------------------------------------------------------------------------------------------------------------------------------------
+    
+# dig goodle.com                {default just gives you the A-rcord}  A-record is what the url HOSTNAME IP is     "Same as #dig google.com A"
+                                 also uses your local DNS settings
+#dig @8.8.4.4 google.com        {use @ to use other dns servers to see what there response is}
+                                IF you get different results with multiple records on multiple queries, the hostname is too big and is hitting multiple spots (like load         balancing)
+#dig @8.8.8.8 google.com MX      ADD MX to get the mail xchange records
+
+#dig mySite.com                results will show AUTHORITY SECTION:    ns1.something.com   ns2.something.com     these are the Hosting DNS servers!!!   
+                                                                                                                 You're not in control of DNS servers
+                                In DIG "ANSWER SECTION" you will see multiple dns servers. these are a priority list. if top not avail, goto next
+
+#dig www.mysite.com            CNAME=    www.mysite.com  CNAME mysite.com
+                                         mysite.com      A     12.2.2.4
+                                         
+#dig mail.google.com                     mail.google.com   CNAME  google.l.mail.com
+                                         google.l.mail.com    A   12.5.6.2
+#dig mysite.com TXT  
+
+#dig mysite.com ANY            Will receive all records : 
+                                                        A records, 
+                                                        NS "nameserver" rcords, 
+                                                        RSIG records, 
+                                                        SOA records, 
+                                                        MX records,
+                                                        DNS KEY
+Reverse DNS is a PTR records "maps IP to a DOMAIN NAME"
+# dig -X 8.8.8.8                            IN    PTR    mysite.com
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+         
+
+
