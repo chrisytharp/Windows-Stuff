@@ -1,0 +1,167 @@
+Volume Shadow Copies are stored on the System Volume Information folder on each drive that has protection enabled.
+
+If VSS is enabled (System Protection turned on), you can perform the following tasks from within advanced system settings. 
+
+Create a restore point
+Perform system restore
+Configure restore settings
+Delete restore points
+From a security perspective, malware writers know of this Windows feature and write code in their malware to look for these files and delete them. Doing so makes it impossible
+to recover from a ransomware attack unless you have an offline/off-site backup.
+
+If you wish to configure Shadow Copies within the attached VM, see below.
+right-click on c:\ Dive icon and then config shadow copies
+
+
+SSH
+Your identification has been saved in /Users/yourname/.ssh/id_rsa.
+Your public key has been saved in /Users/yourname/.ssh/id_rsa.pub.
+id_rsa is private key && is_rsa.pub is you’re public key
+Transferring Files From Your Host - SCP (SSH)
+https://tryhackme.com/room/linuxfundamentalspart3#:~:text=Secure%20copy%2C%20or,txt%20notes.txt%C2%A0
+Secure copy, or SCP, is just that -- a means of securely copying files. Unlike the regular cp command, this command allows you to transfer files between two computers using 
+the SSH protocol to provide both authentication and encryption.
+
+Working on a model of SOURCE and DESTINATION, SCP allows you to:
+
+Copy files & directories from your current system to a remote system
+Copy files & directories from a remote system to your current system
+Provided that we know usernames and passwords for a user on your current system and a user on the remote system. For example, let's copy an example file from our machine to 
+a remote machine, which I have neatly laid out in the table below:
+
+VariableValue
+The IP address of the remote system 192.168.1.30
+User on the remote systemubuntu
+Name of the file on the local systemimportant.txt
+
+ARP stands for “Address Resolution Protocol” is a protocol for mapping an IP address to a physical MAC address on a local area network. Basically, ARP is a program used by a computer system to find another computer's MAC address based on its IP address.
+ping sweep to discover all device on NW nmap -sn 192.168.0.1-254
+nmap -sn 192.168.0.0/24
+Name that we wish to store the file as on the remote systemtransferred.txt
+With this information, let's craft our scp command (remembering that the format of SCP is just SOURCE and DESTINATION)
+
+scp important.txt ubuntu@192.168.1.30:/home/ubuntu/transferred.txt
+
+And now let's reverse this and layout the syntax for using scpto copy a file from a remote computer that we're not logged into 
+
+VariableValue
+IP address of the remote system192.168.1.30
+User on the remote systemubuntu
+Name of the file on the remote systemdocuments.txt
+Name that we wish to store the file as on our systemnotes.txt
+The command will now look like the following: scp ubuntu@192.168.1.30:/home/ubuntu/documents.txt notes.txt
+https://github.com/sc0tfree/updog
+replace python simpleHTTPserver
+To see the processes run by other users and those that don't run from a session (i.e. system processes), we need to provide aux to the ps command like so: ps aux
+kill PID 1337, we'd use kill 1337.
+
+Below are some of the signals that we can send to a process when it is killed:
+
+SIGTERM - Kill the process, but allow it to do some cleanup tasks beforehand
+SIGKILL - Kill the process - doesn't do any cleanup after the fact
+SIGSTOP - Stop/suspend a process
+systemctl:
+
+Start
+Stop
+Enable
+Disable
+start process-stop-process-enable-process -disable-process
+setting enable & disable process on boot up and down
+
+
+	windows files  Every file has at least one data stream ($DATA), and ADS allows files to contain more than one stream of data. Natively Window Explorer doesn't display ADS
+  to the user. There are 3rd party executables that can be used to view this data, but Powershell gives you the ability to view ADS for files.
+
+From a security perspective, malware writers have used ADS to hide data.
+	This is where environment variables, more specifically system environment variables, come into play. Even though not discussed yet, the system  environment variable for 
+  the Windows directory is %windir%.
+
+Per Microsoft, "Environment variables store information about the operating system environment. This information includes details such as the operating system path, the
+number of processors used by the operating system, and the location of temporary folders".
+	Another way to access this information, and then some, is using Local User and Group Management. 
+
+Right-click on the Start Menu and click Run. Type lusrmgr.msc
+
+
+	User Account Control (UAC)
+
+	compmgmt
+	WMI Control configures and controls the Windows Management Instrumentation (WMI) service.
+
+Per Wikipedia, "WMI allows scripting languages (such as VBScript or Windows PowerShell) to manage Microsoft Windows personal computers and servers, both locally
+and remotely. Microsoft also provides a command-line interface to WMI called Windows Management Instrumentation Command-line (WMIC)."
+
+Note: The WMIC tool is deprecated in Windows 10, version 21H1. Windows PowerShell supersedes this tool for WMI.
+	What is the System Information (msinfo32) tool?
+
+Per Microsoft, "Windows includes a tool called Microsoft System Information (Msinfo32.exe).  This tool gathers information about your computer and displays a comprehensive
+view of your hardware, system components, and software environment, which you can use to diagnose computer issues."
+
+The  information in System Summary is divided into three sections:
+
+Hardware Resources
+Components
+Software Environment
+	The Windows\System32 Folder task) where Environment Variables was briefly touched on. 
+
+Per Microsoft, "Environment variables store information about the operating system environment. This information includes details such as the operating system path, the
+number of processors used by the operating system, and the location of temporary folders.
+
+The environment variables store data that is used by the operating system and other programs. For example, the WINDIR environment variable contains the location of the
+Windows installation directory. Programs can query the value of this variable to determine where Windows operating system files are located".
+
+Click on Environment Variables to see the assigned values for the virtual machine.
+	Another method to view environment variables is 
+  Control Panel > System and Security > System > Advanced system settings > Environment Variables OR Settings > System > About > system info > Advanced system settings > 
+  Environment Variables
+	We're continuing with Tools that are available through the System Configuration panel.
+
+What is Resource Monitor (resmon)?
+
+Per Microsoft, "Resource Monitor displays per-process and aggregate CPU, memory, disk, and network usage information, in addition to providing details about which processes
+are using individual file handles and modules. Advanced filtering allows users to isolate the data related to one or more processes 
+(either applications or services), start, stop, pause, and resume services, and close unresponsive applications from the user interface. It also includes a process analysis 
+feature that can help identify deadlocked processes and file locking conflicts so that the user can attempt to resolve the conflict instead of closing an application 
+and potentially losing data."
+
+As some of the other tools mentioned in this room, this utility is geared primarily to advanced users who need to perform advanced troubleshooting on the computer system.
+
+In the Overview tab, Resmon has four sections:
+
+CPU
+Disk
+Network
+Memory
+
+simple commands, such as hostname and whoami.
+ommand is netstat. Per the help manual, this command will display protocol statistics and current TCP/IP network connections.
+et command is primarily used to manage network resources. This command supports sub-commands.
+
+If you type net without a sub-command, the output will show the syntax for the root command showing a few of the sub-commands you can use.
+
+
+
+For the net command, to display the help manual /? will not work. In this case, you need to use different syntax, which is net help.
+
+
+
+So, if you wish to see the help information for net user , the command is net help user.
+KNOW & FIND all helpful command
+There are various ways to view/edit the registry. One way is to use the Registry Editor (regedit).
+BitLocker?
+
+Per Microsoft, "BitLocker Drive Encryption is a data protection feature that integrates with the operating system and addresses the threats of data theft or exposure from
+lost, stolen, or inappropriately decommissioned computers".
+Tip: Command to open the Windows Defender Firewall is WF.msc.
+Core isolation
+
+Memory Integrity - Prevents attacks from inserting malicious code into high-security processes.
+What is the Trusted Platform Module (TPM)?
+
+Per Microsoft, "Trusted Platform Module (TPM) technology is designed to provide hardware-based, security-related functions. A TPM chip is a secure crypto-processor that is
+designed to carry out cryptographic operations. The chip includes multiple physical security mechanisms to make it tamper-resistant, and malicious software is unable to 
+tamper with the security functions of the TPM".
+Per Microsoft, the Volume Shadow Copy Service (VSS) coordinates the required actions to create a consistent shadow copy (also known as a snapshot or a point-in-time copy) 
+of the data that is to be backed up. 
+

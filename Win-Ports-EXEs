@@ -1,0 +1,76 @@
+A security identifier (SID) is a unique value of variable length that is used to identify a security principal (such as a security group) in Windows operating systems. 
+                             SIDs that identify generic users or generic groups is well known.Their values remain constant across all operating systems.
+
+PORT
+5353  mDNS                multicast DNS (mDNS) protocol resolves hostnames to IP addresses within small networks that do not include a local name server(zero-configuration service) 
+                          It was designed to work as either a stand-alone protocol or compatibly with standard DNS servers.
+389   RDP
+139   SMB                 SMB originally ran on top of NetBIOS using port 139. NetBIOS is an older transport layer that allows Windows computers to talk to each other on the same network.
+445   SMB                 Later versions of SMB (after Windows 2000) began to use port 445 on top of a TCP stack. Using TCP allows SMB to work over the internet.
+<<<LLMNR/NBT-NS >>>
+535   LLMNR 'queries'     Link-Local Multicast Name Resolution is a protocol based on the Domain Name System (DNS) packet format that allows both IPv4 and IPv6 hosts to perform name resolution for hosts on the same local link. 
+                          It is included in Windows Vista, Windows Server 2008, Windows 7, Windows 8 and Windows 10.[1] It is also implemented by systemd-resolved on Linux
+                         
+NetBIOS provides three distinct services: NetBIOS was developed in the early 1980s, targeting very small networks (about a dozen computers)
+                          is an acronym for Network Basic Input/Output System. It provides services related to the session layer of the OSI model allowing applications on separate computers to communicate over a LAN
+137   NETBIOS             Name service for name registration and resolution (ports: 137/udp and 137/tcp)
+138   NETBIOS             Datagram distribution service for connectionless communication (port: 138/udp)
+139   NETBIOS             Session service for connection-oriented communication (port: 139/tcp)
+3306  MySQL (default PORT)
+
+Azure Active Directory is a secure online authentication store, which can contain users and groups. Users have a username and a password which are used when you sign in to 
+an application that uses Azure Active Directory for authentication. So, for example, all of the Microsoft Cloud services use Azure Active Directory for authentication:
+Office 365, Dynamics 365 and Azure.
+Azure Active Directory supports the following authentication methods:
+					SAML (Security Assertion Markup Language)
+					OAUTH 2.0
+					OpenID Connect
+SAML (Security Assertion Markup Language)
+_______________
+
+Security Assertion Markup Language (SAML) is a type of Single Sign-On (SSO) standard. It defines a set of rules/protocols that allow users to access web applications with a
+single login. This is possible because those applications (referred to as “Service Providers”) all trust the systems that verify users’ identities (referred to as 
+“Identity Providers”).
+					Service Providers - These are the systems and applications that users access throughout the day.
+					Identity Providers - This would be the system that performs user authentication.
+OAUTH 2.0
+______________
+
+OAuth 2.0 is a standard that apps use to provide client applications with access.
+OAuth 2.0 spec has four important roles:
+The authorization server, which is the server that issues the access token.
+The resource owner, normally your application's end-user, that grants permission to access the resource server with an access token.
+The client, which is the application that requests the access token, and then passes it to the resource server.
+The resource server, which accepts the access token and must verify that it is valid. In this case, this is your application.
+
+OpenID Connect
+_______________
+OpenID Connect is an authentication standard built on top of OAuth 2.0. It adds an additional token called an ID token.
+For that, it uses simple JSON Web Tokens (JWT). While OAuth 2.0 is about resource access and sharing, OIDC is all about user authentication
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+SHIM CACHE
+	aka Application Compatibility Cache
+		Shimcache, also known as AppCompatCache, is a component of the Application Compatibility Database, which was created by Microsoft and used by the Windows operating system to identify application compatibility issues. This helps developers troubleshoot legacy functions and contains data related to Windows features.
+
+	AmCache
+		The AmCache is an artifact which stores metadata related to PE execution and program installation on Windows 7 and Server 2008 R2 and above.
+
+USER ASSIST & MUICACHE
+	UserAssist
+		records the information related to programs run by a user on a Windows system.
+
+	MUICach
+		Each time that you start using a new application, Windows operating system automatically extract the application name from the version resource of the exe file, and stores it for using it later, in Registry key known as the 'MuiCache
+
+WINDOWS PREFETCH
+	prefetch makes a cache file of all your software, boot files, and other stuff. Prefetch helps you to open your most frequently used application by reducing the loading time of a particular application resource. prefetch is basically an important time-saving tool. C:\WINDOWS\Prefetch\SomeProgram.EXE-21321.pf
+
+WINDOWS SECURITY Logs
+WINDOWS SYSTEM Logs
+WINDOWS APPLICATION Logs
+
+Cross site forg req= steal session toke from user browser and use it in your web browser to get access 
+server site forg req= losd msklicious code in web browser and any user who visits will get compromised and send data to attacker
+                             

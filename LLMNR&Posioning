@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NTLMv1 & NTLMv2 Relay ATTACKS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+          \\ SMB SIGNING prevents these Attacks - however SMB signing is off by feault and recommended to keep off die to speed
+LLMNR posining: LinkLocalMulticastNameResolution - Windows component used to identify hosts when DNS fails- if DNS fails machine will communicate w/ other machines using LLMNR
+                and ask if anyone knows a particular host
+                
+                1- CLIENT sends a req to who is //pintserver DNS will fail to resolve 
+                2- CLIENT LLMNR will ask other devices if the know //pintserver
+                3- ATTACKER on NW can sit & Listen for LLMNR broadcasts 
+                4- ATTACKER will reply saying it knows //pintserver & tells CLIENT to pass them their HASH and they will connect them to the SERVER '//pintserver'
+                5- CLINET sends hash - ATTACKER will then crack HASH and now have the CLIENTS password
+
+TOOLS : Responder is used by ATTACKER
+               # responder -I eth0 -rdwv
+               ~make sure poissoners are [on]
+               ~verify appropiate [servers] are [on]
+               ~wait and listen 
+               ~store hash and crack - HASH is stored as NTLMv2    NOTE: strong passwords are hard to crack!!
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+               
+

@@ -1,0 +1,49 @@
+Protocol                                                            PORT
+----------              ---------------           ----------        --------
+SMTP                    (sending mail)	  Encrypted-SSL         465
+SMTP                    (sending mail)	  Unencrypted           25 (or 26)
+POP3                    (receiving mail)	  Encrypted-TLS         995
+POP3                    (receiving mail)	  Unencrypted           110
+IMAP                    (receiving mail)	  Encrypted-TLS         993
+IMAP                    (receiving mail)	  Unencrypted           143
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MTA Mail Transfer Agent - are the servers that are tasked to deliver email 
+             POSTFIX  is a popular MTA
+
+What is SMTP?
+            SMTP "Simple Mail Transfer Protocol". Handle the "sending of emails". In order to support email services, a protocol pair is required, 
+            comprising of SMTP and POP/IMAP. Together they allow the user to send outgoing mail and retrieve incoming mail.
+
+            The SMTP server performs three basic functions:
+                                        Verifies who is sending emails through the SMTP server.
+                                        Sends the outgoing mail
+                                        If the outgoing mail can't be delivered it sends the message back to the sender
+POP and IMAP?
+            POP"Post Office Protocol" & IMAP"Internet Message Access Protocol" are both email protocols who are responsible for the transfer of email between a client and 
+            a mail server. 
+            POP downloads the inbox from the mail server, to the client. 
+            IMAP synchronise the current inbox with mail on the server, downloading anything new!! 
+                This means that changes to the inbox made on one computer will persist if you then synchronise the inbox from another computer!
+            
+
+How does SMTP work?
+
+Email delivery functions much the same as the physical mail delivery system. The user will supply the email (a letter) and a service (the postal delivery service), 
+and through a series of steps- will deliver it to the recipients inbox (postbox). The role of the SMTP server in this service, is to act as the sorting office, 
+the email (letter) is picked up and sent to this server, which then directs it to the recipient.
+We can map the journey of an email from your computer to the recipient’s like this:
+
+1. The mail user agent, which is either your email client connects to the SMTP server of your domain,This initiates the SMTP handshake.
+This connection works over the SMTP port- which is usually 25. Once these connections have been made and validated,the SMTP session starts.
+
+2. Sending mail can now begin. The client first submits the sender, and recipient's email address- the body of the email and any attachments, to the server.
+
+3. SMTP server checks whether the domain name of the recipient and the sender is the same.
+
+4. SMTP server of the sender will make a connection to the recipient's SMTP server. If the recipient's server can't be accessed, or is not available- 
+   the Email gets put into an SMTP queue.
+
+5. Recipient's SMTP server will verify the incoming email. It does this by checking if the domain and user name have been recognised. The server will then forward email 
+   to the POP or IMAP server!!!
+
+6. The E-Mail will then show up in the recipient's inbox.

@@ -1,0 +1,40 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Windows 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      -From an admin account, open Windows command prompt (right click, run as administrator).
+      -Execute “at 10:00 calc.exe,” substituting a time in the near future for 10:00.
+      -The program should respond with “Added a new job with job ID = 1” where the job ID is dependent on what tasks are scheduled.
+      -The program should execute at the time specified. This is what the analytic should fire on.
+      -To remove the scheduled task, execute “at 1 /delete” where you replace “1” with the job ID output in step 2a above.
+      -"at 10:00 calc.exe // returns a job number X"
+      -"at X /delete"
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------      
+*Nix  cronjobs
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Users may want to schedule a certain action or task to take place after the system has booted. Take, for example, running commands, backing up files, or launching your 
+favorite programs
+
+We're going to be talking about the cron process, but more specifically, how we can interact with it via the use of crontabs . Crontab is one of the processes that is 
+started during boot, which is responsible for facilitating and managing cron jobs.
+
+A crontab is simply a special file with formatting that is recognised by the cron process to execute each line step-by-step. Crontabs require 6 specific values:
+
+      ValueDescription
+            MINWhat minute to execute at
+            HOURWhat hour to execute at
+            DOMWhat day of the month to execute at
+            MONWhat month of the year to execute at
+            DOWWhat day of the week to execute at
+            CMDThe actual command that will be executed.
+
+Let's use the example of backing up files. You may wish to backup "cmnatic"'s  "Documents" every 12 hours. We would use the following formatting: 
+
+0 *12 * * * cp -R /home/cmnatic/Documents /var/backups/
+
+An interesting feature of crontabs is that these also support the wildcard or asterisk (*). If we do not wish to provide a value for that specific field, i.e. we don't
+care what month, day, or year it is executed -- only that it is executed every 12 hours, we simply just place an asterisk.
+
+This can be confusing to begin with, which is why there are some great resources such as the online "Crontab Generator" as well as the site "Cron Guru"!
+
+Crontabs can be edited by using crontab -e, where you can select an editor (such as Nano) to edit your crontab.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------

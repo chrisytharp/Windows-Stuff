@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+'KERBEROS' replaced 'NTLMv2' which replaced 'NTLM' which replaced 'LANMAN'
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+NTLM is suseptable to: Relay &  Pass the Hash
+NTLM is still in environment:
+                Microsoft Servers Protocols support NTLM downgrade 
+                Supported by Vendors and Protocols to preserve Backwards Compatibility 
+                FEAR of breaking Legacy Application (files server, printers)   
+                
+NT LAN Manager (NTLM) is the default authentication scheme used by the WinLogon process; it uses three ports between the client and domain controller (DC):
+UDP 137 - UDP 137 (NetBIOS Name)
+UDP 138 - UDP 138 (NetBIOS Netlogon and Browsing)
+1024-65535/TCP - TCP 139 (NetBIOS Session)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+NT(New Technology)LAN Manager(NTLM) is challenge–response for User Autherntication 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        -suite of Microsoft security protocols intended to provide authentication, integrity, and confidentiality to users.
+        -The NTLM protocol suite combines the LAN Manager authentication protocol, NTLMv1, NTLMv2 and NTLM2 Session protocols in a single package.
+        -NTLM passwords are considered weak because they can be brute-forced very easily with modern hardware
+
+NTLM is a challenge–response authentication protocol which uses "3" messages to authenticate a client in a connection-oriented environment (connectionless is similar), 
+        and a fourth additional message if integrity is desired.
+
+1- CLIENT sends connection request to SERVER
+2- SERVER sends back a one-time challenge that the CLIENT encrypts w/ CLIENTS password hash  
+3- SERVER checks if challenge hash matches, and if so allows access (Server also has CLIENT password so it knows what the challenge hash will look like)
+
+The NTLM protocol uses one or both of two hashed password values,
+both of which are also stored on the server (or domain controller), 
+and which through a lack of salting are password equivalent, 
+meaning that if you grab the hash value from the server, 
+you can authenticate without knowing the actual password.PASS THE HASH
+
+The two are the LM hash (a DES-based function applied to the first 14 characters of the password converted to the traditional 8-bit PC charset for the language), 
+and the NT hash (MD4 of the little endian UTF-16 Unicode password). Both hash values are 16 bytes (128 bits)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+(LANMAN) is challenge–response for User Autherntication NOT SALTED
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LM hash is computed as follows:
+      user's password is restricted to a maximum of fourteen characters.
+      user’s password is converted to uppercase.
+      user's password is encoded in the System OEM code page.
+      password is NULL-padded to 14 bytes.
+      The “fixed-length” password is split into two 7-byte halves.
+These values are used to create two DES keys, one from each 7-byte half, by converting the seven bytes into a bit stream with the most significant bit first,
+and inserting a parity bit after every seven bits (so 1010100 becomes 10101000). This generates the 64 bits needed for a DES key. (A DES key ostensibly consists of 64 bits;
+however, only 56 of these are actually used by the algorithm. The parity bits added in this step are later discarded.)
+Each of the two keys is used to DES-encrypt the constant ASCII string “KGS!@#$%”,[Notes 2] resulting in two 8-byte ciphertext values. 
+The DES CipherMode should be set to ECB, and PaddingMode should be set to NONE.
+These two ciphertext values are concatenated to form a 16-byte value, which is the LM hash.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------

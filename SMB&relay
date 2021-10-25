@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2 File protocols supported by windows
+  SMB & NFS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            SMB 'server message block' created by IBM & Microsoft added other stuff (like LANMAN) can map drive to remote file share & have computer 
+                                       access drive like its a local harddisk
+                  NOTE:   CIFS 'Common Internet File System' Microsoft tried to rename to CIFS but didn't take so CIFS is a 'dialect' of SMB
+            SMB 2.0 - Microsoft added features and reduced chttiness of protocol
+            SMB 3.0 - Adds additional functionality 
+            
+            NFS 'Netwrok File Systems' created by SUN - used w/ unix based system 
+            NFS version 4.0 is latest and can use KERBEROS!!
+              If someone wants to access a file using NFS, an RPC call is placed to NFSD(the NFS daemon)on the server. 
+              This call takes parameters such as:
+                      The file handle
+                      The name of the file to be accessed
+                      The user's, user ID
+                      The user's group ID
+              A computer running Windows Server can act as an NFS file server for other non-Windows client computers. 
+              Likewise, NFS allows a Windows-based computer running Windows Server to access files stored on a non-Windows NFS server.
+   It is best to use NATIVE protocol when possible:
+            If connect 2 UNIX comp. together use NFS
+            If connecting 2 Win comp. use SMB
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SMB  Uses NTLM Challenge Response protocol
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            NTLM is a challenge/response protocol. The authentication happens something like this:
+            1- CLIENT attempts to login and the server responds with a challenge "If you are who you say you are, then encrypt this thing (Challenge X) with your hash."
+            2- CLIENT encrypts the challenge w/ its HASH sends back the encrypted challenge response. 
+            3- SERVER attempts to decrypt the challenge response with the user's password hash.
+                If it decrypts to reveal the challenge that it sent, then the user is authenticated. 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------            
+SMB Relay attacks {SMB Relays are the network version of Pass the Hash attacks} 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   Exploits NTLM authen 
+   ATTACKER Performs MITM ATTACK 
+            1- ATTACKER selects the TARGET server he wants to authenticate to & waits for someone on the network to authenticate to his machine. 
+            {This is where rogue host detection, vulnerability scanners, and administrator scripts that automatically authenticate to hosts become a penetration tester's friend}
+            2- When an automated process connects to the attacker, he passes the authentication attempt off to his TARGET 
+            3- TARGET generates a challenge and sends it back to the attacker. 
+            4- ATTACKER sends challenge back to the originating scanning system. 
+            5- Scanning system encrypts the hash with the correct password hash and sends it to the attacker. 
+            6- ATTACKER passes the correctly encrypted response back to his target and successfully authenticates. 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------

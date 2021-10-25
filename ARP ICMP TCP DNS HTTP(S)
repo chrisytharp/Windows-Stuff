@@ -1,0 +1,101 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ARP or Address Resolution Protocol is a Layer 2 protocol that is used to connect IP Addresses with MAC Addresses. 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+They will contain REQUEST messages and RESPONSE messages. 
+To identify packets the message header will contain one of two operation codes:
+
+Request (1)       who has 192.168.1.1 tell 192.168.1.2        <- boradcast
+Reply (2)         192.168.1.2 at 00:22:11:33:22:44            <- direct msg
+
+ !! Enable a setting within Wireshark however to resolve physical addresses. Navigate to View > Name Resolution > Ensure that Resolve Physical Addresses is checked
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+IMCP    Remember that a ping test uses ICMP, so there are no real ports being used
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ICMP request:
+There are a few important things within the packet details that we can take note of first being the type and codeof the packet. 
+A type that equals 8 means that it is a request packet, if it is equal to 0 it is a reply packet. 
+When these codes are altered or do not seem correct that is typically a sign of suspicious activity.
+
+There are two other details within the packet that are useful to analyze: 
+timestamp and data. 
+The timestamp can be useful for identifying the time the ping was requested it can also be useful to identify suspicious activity in some cases.
+We can also look at the data string which will typically just be a random data string
+
+ICMP Reply:
+One of the main difference that distinguishes a reply packet is the code, in this case, you can see it is 0, confirming that it is a reply packet.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TCP
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TCP can give useful insight into a network when analyzing however it can also be hard to analyze due to the number of packets it sends. 
+This is where you may need to use other tools like:
+     RSA NetWitness 
+     NetworkMiner 
+Typically when this handshake is out of order or when it includes other packets like an RST packet, something suspicious or wrong is happening in the network. 
+The Nmap scan in the section above is a perfect example of this.
+
+Below we see packet details for an SYN packet. The main thing that we want to look for when looking at a TCP packet is the sequence number and acknowledgment number.
+Within Wireshark, we can also see the original sequence number by navigating to edit > preferences > protocols > TCP > relative sequence numbers (uncheck boxes).
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DNS POT 53 (both UDP and TCP)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DNS Query:
+
+Information we can look at is where the query is originating from: UDP (User datagram Protocol) 53 which means that this packet passes that check, if it was TCP 53 then it 
+should be considered suspicious traffic and needs to analyzed further. We can also look at what it is querying as well, this can be useful with other information to build a
+story of what happened.
+
+When analyzing DNS packets you really need to understand your environment and whether or not the traffic would be considered normal within your environment.
+
+DNS Response:
+Is similar to the query packet, but it includes an answer as well which can be used to verify the query.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HTTP 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HTTP is one of the most straight forward protocols for packet analysis, the protocol is straight to the point and does not include any handshakes or prerequisites
+before communication
+We can use some of Wireshark's built-in features to help digest all of this data and organize it for further future analysis. We can begin by looking at a very useful
+feature in Wireshark to organize the protocols present in a capture the Protocol Hierarchy.
+Navigate to Statistics > Protocol Hierarchy.
+Export HTTP Object. This feature will allow us to organize all requested URIs in the capture. To use Export HTTP
+Object navigate to file > Export Objects > HTTP.
+Endpoints feature navigate to Statistics > Endpoints.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HTTPs
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Before sending encrypted information the client and server need to agree upon various steps in order to make a secure tunnel.
+
+         1- Client and server agree on a protocol version
+         2- Client and server select a cryptographic algorithm
+         3- Client and server can authenticate to each other; this step is optional
+         4- Creates a secure tunnel with a public key
+
+Server Hello packet sending similar information as the Client Hello packet however this time it includes session details and SSL certificate information
+Client Key Exchange packet, this part of the handshake will determine the public key to use to encrypt further messages between the Client and Server.
+Server will confirm the public key and create the secure tunnel, all traffic after this point will be encrypted based on the agreed-upon specifications
+The traffic between the Client and the Server is now encrypted and you will need the secret key in order to decrypt the data stream being sent between the two hosts.
+
+Practical HTTPS Packet Analysis
+Need PCAP and decryption key
+Load the PCAP into Wireshark. Navigate to File > Open and select the PCAP
+All of the requests are encrypted. Looking closer at the packets we can see the HTTPS handshake as well as the encrypted requests themselves. 
+Take a closer look at one of the encrypted requests
+Confirm from the packet details that the Application Data is encrypted. You can use an RSA key in Wireshark in order to view the data unencrypted. In order 
+to load an RSA key:
+Navigate to Edit > Preferences > Protocols > TLS >  [+] . If you are using an older version of Wireshark then this will be SSL instead of TLS. 
+
+Fill in the various sections on the menu with the following preferences:
+   IP Address: []IP
+   Port: start_tls
+   Protocol: http
+   Keyfile: RSA key location
+
+Now that we have an RSA key imported into Wireshark, if we go back to the packet capture we can see that the data stream is now unencrypted.
+Looking further at one of the details of the packet we can see the unencrypted data stream closer. 
+
+Looking at the packet details we can see some very important information such as the request URI and the User-Agent which can be very useful in practical applications 
+of Wireshark such as threat hunting and network administration.
+
+We can now use other features in order to organize the data stream, like using the export HTTP object feature, to 
+access this feature:
+Navigate to File > Export Objects > HTTP
+
