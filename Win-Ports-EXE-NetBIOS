@@ -18,9 +18,14 @@ NetBIOS provides three distinct services: NetBIOS was developed in the early 198
 139   NETBIOS             Session service for connection-oriented communication (port: 139/tcp)
 3306  MySQL (default PORT)
 
+Purpose:	NetBIOS Name Service
+Description:	UDP NetBIOS name query packets are sent to this port, usually of Windows machines but also of any other system running Samba (SMB), to ask the receiving machine to disclose and return its current set of NetBIOS names.
+Related Ports:	138, 139, 445
+
 Azure Active Directory is a secure online authentication store, which can contain users and groups. Users have a username and a password which are used when you sign in to 
 an application that uses Azure Active Directory for authentication. So, for example, all of the Microsoft Cloud services use Azure Active Directory for authentication:
 Office 365, Dynamics 365 and Azure.
+
 Azure Active Directory supports the following authentication methods:
 					SAML (Security Assertion Markup Language)
 					OAUTH 2.0
