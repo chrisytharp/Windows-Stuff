@@ -33,6 +33,20 @@ NOTE: - EVERY TIME CLIENT wants access to FILE servers, it has to send a COPT of
       - ALL TGT's by default last 8 Hrs
       
 TOOL "KerbTray" will show all tickets on your computers RAM
+
+ANOTHER EXPLANAITION
+AS-REQ - 1.) The client requests an Authentication Ticket or Ticket Granting Ticket (TGT).
+
+AS-REP - 2.) The Key Distribution Center verifies the client and sends back an encrypted TGT.
+
+TGS-REQ - 3.) The client sends the encrypted TGT to the Ticket Granting Server (TGS) with the Service Principal Name (SPN) of the service the client wants to access.
+
+TGS-REP - 4.) The Key Distribution Center (KDC) verifies the TGT of the user and that the user has access to the service, then sends a valid session key for the service
+              to the client.
+
+AP-REQ - 5.) The client requests the service and sends the valid session key to prove the user has access.
+
+AP-REP - 6.) The service grants access
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 HOW KERBEROASTING WORKS  GREAT WAY To Escalate Priveleges
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
