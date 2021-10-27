@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 NTLMv1 & NTLMv2 Relay ATTACKS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-          \\ SMB SIGNING prevents these Attacks - however SMB signing is off by feault and recommended to keep off die to speed
+          \\ SMB SIGNING prevents these Attacks - however SMB signing is off by default and recommended to keep off due to NW speed reduction
 LLMNR posining: LinkLocalMulticastNameResolution - Windows component used to identify hosts when DNS fails- if DNS fails machine will communicate w/ other machines using LLMNR
                 and ask if anyone knows a particular host
                 
