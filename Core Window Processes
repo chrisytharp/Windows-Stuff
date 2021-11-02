@@ -37,7 +37,7 @@ processes on a Windows system: tasklist, Get-Process or ps (PowerShell), and wmi
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 System
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-The first Windows process on the list is SYSTEM. A PID for any given process is assigned at RANDOM, but that is not the case for the System process. The PID for
+The first Windows process on the Prcoess list is SYSTEM. A PID for any given process is assigned at RANDOM, but that is not the case for the System process. The PID for
 System is ALWAYS 4
 
 The official definition from Windows Internals 6th Edition:
