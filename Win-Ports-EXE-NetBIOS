@@ -20,6 +20,7 @@ NetBIOS provides three distinct services: NetBIOS was developed in the early 198
 137   NETBIOS             Name service for name registration and resolution (ports: 137/udp and 137/tcp)
 138   NETBIOS             Datagram distribution service for connectionless communication (port: 138/udp)
 139   NETBIOS             Session service for connection-oriented communication (port: 139/tcp)
+	https://en.wikipedia.org/wiki/NetBIOS#Session_service
 3306  MySQL (default PORT)
 
 Purpose:	NetBIOS Name Service
