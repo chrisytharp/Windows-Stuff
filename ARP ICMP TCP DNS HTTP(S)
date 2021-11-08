@@ -11,7 +11,10 @@ Reply (2)         192.168.1.2 at 00:22:11:33:22:44            <- direct msg
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 IMCP    Remember that a ping test uses ICMP, so there are no real ports being used
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ICMP request:
+ICMP request: 
+ICMP is not associated with TCP or UDP This makes ICMP a connectionless protocol: one device does not need to open a connection with another device before sending 
+an ICMP message
+
 There are a few important things within the packet details that we can take note of first being the type and codeof the packet. 
 A type that equals 8 means that it is a request packet, if it is equal to 0 it is a reply packet. 
 When these codes are altered or do not seem correct that is typically a sign of suspicious activity.
