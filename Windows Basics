@@ -15,7 +15,10 @@ LINE
 170		Trusted Platform Module (TPM)
 
 
-
+BITS
+-----
+Background Intelligent Transfer Service (BITS) is a Windows tool used to transfer data between a client and server. Primarily utilised for downloading Windows updates,
+this service has also been employed by malicious users to install malware.
 
 
 
