@@ -3,8 +3,8 @@ It uses a client-server model to do this, and- as we'll come on to later- relays
 
 How does FTP work?
                 A typical FTP session operates using two channels:
-                              1- A command (sometimes called the control) channel
-                              2- A data channel.
+                              1- A command (sometimes called the control) port 21 for monitoring listening out for incoming ‘input’ commands.
+                              2- A data channel / channel FTP uses port 20 for data transfer
                               
 As their names imply, the command channel is used for transmitting commands as well as replies to those commands, while the data channel is used for transferring data.
 
