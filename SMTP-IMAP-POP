@@ -29,7 +29,12 @@ POP and IMAP?
             POP downloads the inbox from the mail server, to the client. 
             IMAP synchronise the current inbox with mail on the server, downloading anything new!! 
                 This means that changes to the inbox made on one computer will persist if you then synchronise the inbox from another computer!
-            
+POP3
+Emails are downloaded and stored on a single device.
+Sent messages are stored on the single device from which the email was sent.
+IMAP
+Emails are stored on the server and can be downloaded to multiple devices.
+Sent messages are stored on the server.
 
 How does SMTP work?
 
