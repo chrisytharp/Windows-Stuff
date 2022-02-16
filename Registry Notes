@@ -116,8 +116,24 @@ Information about the last executed programs can be found at the following locat
 
                         Amcache.hve\Root\File\{Volume GUID}\
 
+BAM/DAM (Background Activity Monitor) -> keeps a tab on the activity of background applications. Similar (Desktop Activity Moderator) or DAM is a part of 
+Microsoft Windows that optimizes the power consumption of the device.
+contains information about last run programs, their full paths, and last execution time.
 
-
+                        SYSTEM\CurrentControlSet\Services\bam\UserSettings\{SID}
+                        SYSTEM\CurrentControlSet\Services\dam\UserSettings\{SID}
+-------------------------------------
+External Devices/USB device forensics
+-------------------------------------
+Device Identification -> SYSTEM\CurrentControlSet\Enum\USBSTOR
+                         SYSTEM\CurrentControlSet\Enum\USB
+First/Last Times Device conneted -> SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial#\Properties\{83da6326-97a6-4088-9453-a19231573b29}\####
+                                      In this key, the #### sign can be replaced by the following digits to get the required information:
+                                      Value	Information
+                                      0064	First Connection time
+                                      0066	Last Connection time
+                                      0067	Last removal time
+USB device Volume Name -> SOFTWARE\Microsoft\Windows Portable Devices\Devices
 
 
 
