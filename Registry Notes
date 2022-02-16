@@ -32,6 +32,9 @@ Registry backups are the opposite of Transaction logs. located in the C:\Windows
 These hives are copied to the C:\Windows\System32\Config\RegBack directory every ten days. 
 *If registry keys might have been DELETED/MODIFIED recently.
 
+----------------------
+SYSTEM INFO & ACCOUNTS
+----------------------
 Get OS version ->  SOFTWARE\Microsoft\Windows NT\CurrentVersion
 Current control set ->
       The hives containing the machine’s configuration data used for controlling SYSTEM STARTUP are called Control Sets. Commonly, we will see two Control Sets, 
@@ -68,6 +71,9 @@ Services -> SYSTEM\CurrentControlSet\Services   "if the start key is set to 0x02
 SAM hive and user information:SAM hive contains user account information, login information, and group information
 -> SAM\Domains\Account\Users
 
+----------------------
+USAGE or KNOWLEDGE OF FILES
+----------------------
 (MRU) Most Recently Used File -> a list of recently opened files for each user -> NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
   To specifically view the last used PDF files, we can look at the following registry key: or .jpg .docx etc
                                           NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pdf
