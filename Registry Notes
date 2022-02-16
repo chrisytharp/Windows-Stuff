@@ -10,3 +10,10 @@ Computer Offline access C:\Windows\System32\Config directory and are:
                         SECURITY (mounted on HKEY_LOCAL_MACHINE\Security)
                         SOFTWARE (mounted on HKEY_LOCAL_MACHINE\Software)
                         SYSTEM (mounted on HKEY_LOCAL_MACHINE\System
+                        
+2 other hives containing user information can be found in the User profile directory (!These are Hidden Files!)
+        NTUSER.DAT (mounted on HKEY_CURRENT_USER when a user logs in)
+        USRCLASS.DAT (mounted on HKEY_CURRENT_USER\Software\CLASSES)
+        
+        The USRCLASS.DAT hive is located in the directory C:\Users\<username>\AppData\Local\Microsoft\Windows
+        The NTUSER.DAT hive is located in the directory C:\Users\<username>\
