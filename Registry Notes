@@ -1,0 +1,12 @@
+Starting with Windows 2000, this information is stored under both the HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER keys. The HKEY_LOCAL_MACHINE\Software\Classes
+key contains default settings that can apply to all users on the local computer. The HKEY_CURRENT_USER\Software\Classes key has settings that override the 
+default settings and apply only to the interactive use
+
+Computer online acess Regedit.exe access registry 
+Computer Offline access C:\Windows\System32\Config directory and are:
+
+                        DEFAULT (mounted on HKEY_USERS\DEFAULT)
+                        SAM (mounted on HKEY_LOCAL_MACHINE\SAM)
+                        SECURITY (mounted on HKEY_LOCAL_MACHINE\Security)
+                        SOFTWARE (mounted on HKEY_LOCAL_MACHINE\Software)
+                        SYSTEM (mounted on HKEY_LOCAL_MACHINE\System
