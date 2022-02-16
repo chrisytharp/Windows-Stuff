@@ -66,7 +66,21 @@ Autostart Programs (Autoruns) ->
 Services -> SYSTEM\CurrentControlSet\Services   "if the start key is set to 0x02, this means that this service will start at boot"
 
 SAM hive and user information:SAM hive contains user account information, login information, and group information
-->
+-> SAM\Domains\Account\Users
+
+(MRU) Most Recently Used File -> a list of recently opened files for each user -> NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+  To specifically view the last used PDF files, we can look at the following registry key: or .jpg .docx etc
+                                          NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.pdf
+Office Recent Files -> NTUSER.DAT\Software\Microsoft\Office\VERSION
+                       NTUSER.DAT\Software\Microsoft\Office\15.0\Word
+                       NTUSER.DAT\Software\Microsoft\Office\VERSION\UserMRU\LiveID_####\FileMRU
+    Get a list of Office versions https://docs.microsoft.com/en-us/deployoffice/install-different-office-visio-and-project-versions-on-the-same-computer#office-releases-and-their-version-number
+
+
+
+
+
+
 
 
 
