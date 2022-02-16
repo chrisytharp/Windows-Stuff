@@ -92,10 +92,29 @@ Windows Explorer Address/Search Bars -> dentify a user's recent activity is by l
                       NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
                       NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
 
+----------------------
+EVIDENCE OF EXECUTION
+----------------------
+UserAssist -> Windows keeps track of applications launched by the user using Windows Explorer. These keys contain information about the programs launched, the
+time of their launch, and the number of times they were executed. However, programs that were run using the command line can't be found in the User Assist keys.
 
+                      NTUSER.DAT\Software\Microsoft\Windows\Currentversion\Explorer\UserAssist\{GUID}\Count
+                      
+ShimCache a.k.a. (Application Compatibility Cache (AppCompatCache))-> mechanism used to keep track of application compatibility with the OS and tracks all
+applications launched on the machine. Its main purpose is to ensure backward compatibility of applications. 
 
+                      SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache
 
+ShimCache stores file name, file size, and last modified time of the executables.
 
+AmCache -> is an artifact related to ShimCache. This performs a similar function to ShimCache, and stores additional data related to program executions. 
+This data includes execution path, installation, execution and deletion times, and SHA1 hashes of the executed programs. 
+
+                      C:\Windows\appcompat\Programs\Amcache.hve
+
+Information about the last executed programs can be found at the following location in the hive:
+
+                        Amcache.hve\Root\File\{Volume GUID}\
 
 
 
