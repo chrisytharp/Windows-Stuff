@@ -32,3 +32,53 @@ Registry backups are the opposite of Transaction logs. located in the C:\Windows
 These hives are copied to the C:\Windows\System32\Config\RegBack directory every ten days. 
 *If registry keys might have been DELETED/MODIFIED recently.
 
+Get OS version ->  SOFTWARE\Microsoft\Windows NT\CurrentVersion
+Current control set ->
+      The hives containing the machine’s configuration data used for controlling SYSTEM STARTUP are called Control Sets. Commonly, we will see two Control Sets, 
+      ControlSet001 and ControlSet002, in the SYSTEM hive on a machine. In most cases, ControlSet001 will point to the Control Set that the machine booted with,
+      and ControlSet002 will be the last known good configuration. Their locations will be:
+
+         SYSTEM\ControlSet001
+         SYSTEM\ControlSet002
+
+      Windows creates a volatile Control Set when the machine is live, called the CurrentControlSet (HKLM\SYSTEM\CurrentControlSet). For getting the most accurate 
+      system information, this is the hive that we will refer to. We can find out which Control Set is being used as the CurrentControlSet by looking at the 
+      following registry value:
+
+         SYSTEM\Select\Current
+
+      Similarly, the last known good configuration can be found using the following registry value:
+
+        SYSTEM\Select\LastKnownGood
+        
+Computer Name -> SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName 
+Time Zone Information -> SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+Network Interfaces and Past Networks -> SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
+The past networks a given machine was connected to can be found in the following locations ->
+                                      SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged
+                                      SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Managed
+Autostart Programs (Autoruns) -> 
+                                  NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+                                  NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+                                  SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+                                  SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+                                  SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+Services -> SYSTEM\CurrentControlSet\Services   "if the start key is set to 0x02, this means that this service will start at boot"
+
+SAM hive and user information:SAM hive contains user account information, login information, and group information
+->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
