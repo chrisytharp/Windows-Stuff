@@ -20,10 +20,12 @@ Windows Explorer Address/Search Bars     <- user's recent activity by looking at
 UserAssist                         <- Applications laucnched through Windows Explorer
 ShimCache a.k.a.(AppCompatCache)   <- like amcache - stores program execution - 
 BAM/DAM (Background Activity Monitor) <- records of backgrounded appplications
-
-
-
-
+USB device Info
+Pre-fetch                          <- stores recently ran applications for speed of end-user
+Windows 10 Timeline                <- Windows10 timeline of Applications & Files
+Windows Jump Lists                 <- helps users go directly to their recently used files from the taskbar.
+Shortcut Files                     <- Wins creates a shortcut file for ea file opened locally or remotely
+IE/Edge history
 ------------------------------------------------------------------------
 Starting w/ Windows 2000, this info is stored under both the HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER keys. 
 HKEY_LOCAL_MACHINE\Software\Classes key contains default settings that can apply to all users on the local computer. 
