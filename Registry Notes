@@ -135,8 +135,16 @@ First/Last Times Device conneted -> SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Pr
                                       0067	Last removal time
 USB device Volume Name -> SOFTWARE\Microsoft\Windows Portable Devices\Devices
 
+Pre-fetch -> When a program is run in Windows, it stores its information for future use. This info is used to load the program quickly in case of frequent use.
+             Prefetch files have an extension of .pf. PF files contain the last run times of the application, the number of times the application was run, 
+             and any files and device handles used by the file
+                                 located -> C:\Windows\Prefetch directory
+                                 
+Windows 10 Timeline -> Win10 stores recently used applications & files in an SQLite database called the Windows 10 Timeline. This data can be a source of 
+                       info about the last executed programs. Contains the application that was executed and the focus time of the application. 
+                                 located ->  C:\Users\<username>\AppData\Local\ConnectedDevicesPlatform\{randomfolder}\ActivitiesCache.db
 
-
+       
 
 
 
