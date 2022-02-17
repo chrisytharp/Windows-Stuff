@@ -4,8 +4,15 @@ Amcache Hive                       <- recently rn programs
 Transaction Logs                   <- shows registry changes
 Backups Logs                       <- registry backups every 10 days
 Get OS version
-Current control set 01             <- System start-up boot config
+Current control set 01             <- System start-up config (on-boot) 
 Current control set 02             <- System start-up config (last-known good config)
+Volatile Current control Set       <- System start-up config (when machine is active)
+Computer Name 
+Time Zone Information
+Network Interfaces and Past Networks
+Autostart Programs (Autoruns)
+
+
 
 
 ------------------------------------------------------------------------
@@ -52,26 +59,25 @@ Current control set ->
       The hives containing the machine’s configuration data used for controlling SYSTEM STARTUP are called Control Sets. Commonly, we will see two Control Sets, 
       ControlSet001 and ControlSet002, in the SYSTEM hive on a machine. In most cases, ControlSet001 will point to the Control Set that the machine booted with,
       and ControlSet002 will be the last known good configuration. Their locations will be:
-
-         SYSTEM\ControlSet001
-         SYSTEM\ControlSet002
+                               located -> SYSTEM\ControlSet001
+                               located -> SYSTEM\ControlSet002
 
       Windows creates a volatile Control Set when the machine is live, called the CurrentControlSet (HKLM\SYSTEM\CurrentControlSet). For getting the most accurate 
       system information, this is the hive that we will refer to. We can find out which Control Set is being used as the CurrentControlSet by looking at the 
       following registry value:
-
-         SYSTEM\Select\Current
+                              located -> SYSTEM\Select\Current
 
       Similarly, the last known good configuration can be found using the following registry value:
-
-        SYSTEM\Select\LastKnownGood
+                              located -> SYSTEM\Select\LastKnownGood
         
 Computer Name -> SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName 
+
 Time Zone Information -> SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+
 Network Interfaces and Past Networks -> SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
-The past networks a given machine was connected to can be found in the following locations ->
-                                      SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged
-                                      SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Managed
+      Past networks a given machine was connected to can be found in the following locations ->
+                                  SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged
+                                  SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Managed
 Autostart Programs (Autoruns) -> 
                                   NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
                                   NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
