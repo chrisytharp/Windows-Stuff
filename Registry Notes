@@ -1,6 +1,17 @@
-Starting with Windows 2000, this information is stored under both the HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER keys. The HKEY_LOCAL_MACHINE\Software\Classes
-key contains default settings that can apply to all users on the local computer. The HKEY_CURRENT_USER\Software\Classes key has settings that override the 
-default settings and apply only to the interactive use
+-------------------------------------------------------------------------
+USRCLASS.DAT & USRCLASS.DAT        <- hives containing USER INFO 
+Amcache Hive                       <- recently rn programs
+Transaction Logs                   <- shows registry changes
+Backups Logs                       <- registry backups every 10 days
+Get OS version
+Current control set 01             <- System start-up boot config
+Current control set 02             <- System start-up config (last-known good config)
+
+
+------------------------------------------------------------------------
+Starting w/ Windows 2000, this info is stored under both the HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER keys. 
+HKEY_LOCAL_MACHINE\Software\Classes key contains default settings that can apply to all users on the local computer. 
+HKEY_CURRENT_USER\Software\Classes key has settings that override the default settings and apply to that interactive user
 
 Computer online acess Regedit.exe access registry 
 Computer Offline access C:\Windows\System32\Config directory and are:
@@ -36,6 +47,7 @@ These hives are copied to the C:\Windows\System32\Config\RegBack directory every
 SYSTEM INFO & ACCOUNTS
 ----------------------
 Get OS version ->  SOFTWARE\Microsoft\Windows NT\CurrentVersion
+
 Current control set ->
       The hives containing the machine’s configuration data used for controlling SYSTEM STARTUP are called Control Sets. Commonly, we will see two Control Sets, 
       ControlSet001 and ControlSet002, in the SYSTEM hive on a machine. In most cases, ControlSet001 will point to the Control Set that the machine booted with,
