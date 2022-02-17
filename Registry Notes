@@ -158,7 +158,8 @@ IE/Edge history -> Browsing history includes files opened in the system as well,
                    source of info on opened files in a system is the IE/Edge history. 
                                   located -> C:\Users\<username>\AppData\Local\Microsoft\Windows\WebCache\WebCacheV*.dat
 
-
+Setupapi dev logs for USB devices -> When new device is attached to sys, info related to the setup of that device is stored in the setupapi.dev.log. 
+                                  located -> C:\Windows\inf\setupapi.dev.log
 
 
 
