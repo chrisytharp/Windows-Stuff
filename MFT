@@ -1,0 +1,62 @@
+Master File Table
+Quick Summary
+The Master File Table (MFT) is one of the most important files that exists on NTFS file systems from a forensics point of view. The MFT is responsible for tracking every file that is created and modified on an NTFS file system.
+
+What's on this page?
+About
+Location
+Record
+Standard information
+Filename information
+Parse
+In this lab
+About
+The MFT keeps a record of every file on an NTFS volume. It also contains metadata for the file and, in some cases, the actual data for the file itself.
+
+Location
+The MFT is a file located in the root of the volume. It is named $MFT and is a protected OS file.
+
+The MFT can be recovered from disk images using tools like FTK Imager and EnCase. It is also possible to recover the MFT from disk images using tools like ICAT.
+
+Record
+Every file that exists has to have an MFT record, which includes the $MFT file. Any file without a record will not be recognised by the OS. The first 16 entries are reserved for NTFS system files. After this, the MFT grows when files are created. Once the MFT expands to add new records it will not shrink back down.
+
+When a file is deleted, its row in the MFT is marked as being ready for reuse. When a new file is created, it will use any free rows before creating new ones. This can lead to a unique situation where the MFT holds metadata for files that no longer exist.
+
+For example, if an MFT holds 5,000 entries and 50 files are deleted but four files are created, there are still 46 records that could be recovered.
+
+There are many fields that make up an MFT record. The fields that are most interesting from a forensics point of view are those that relate to time. The MFT holds two sets of time values:
+
+Standard information
+Filename information
+Standard information
+The standard information includes file attributes like read-only and archive, timestamps depictingwhen the file was created or modified, and the hard link count,for example, the number of directory entries that reference a record.
+
+The layout of standard information is as follows:
+
+Standard Attribute Header
+C Time – File Creation
+A Time – File Altered
+M Time – MFT Changed
+R Time – File Read
+DOS File Permissions
+Maximum Number of Versions
+Version Number
+Class ID
+Owner ID
+Security ID
+Quota Changed
+Update Sequence Number (USN)
+Filename information
+On an NTFS system a single file can have multiple filenames. The best example of this is files that also have an 8.3 filename. This means that MFT records can have multiple file name entries and each of these has its own set of times to track modifications. This set of times is created and changed when a user changes a filename rather than when the data itself is changed; each set of time values has four elements to it:
+
+Modification date
+Access date
+Change date
+Birth (entry) date
+The other interesting field is the data attribute field. This contains information on where the data for the file exists. Typically this contains the starting cluster and the number of clusters that the data occupies.
+
+If the file is smaller than around 512 bytes, the data is actually written into the MFT data attribute. A standard MFT record has a limit of 1024 bytes, as long as filenames can impact this file size. This means that if small files like scripts have been deleted, they may be recoverable from its MFT entry.
+
+Parse
+There are several tools that can parse MFT records from an MFT file; one such tool is AnalyzeMFT. This command line tool can be used to extract time fields and other metadata from a $MFT file. Its aim is to be used as part of a timeline analysis and as such you will notice most of the command line options are time-related.
