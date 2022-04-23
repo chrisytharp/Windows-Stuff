@@ -1,0 +1,35 @@
+NTDS
+Quick Summary
+On a standard Windows installation, user accounts are stored in the registry. For domain controllers, the active directory accounts are stored in a database-style file called NTDS.dit.
+
+What's on this page?
+NTDS
+esedbexport
+ntdsxtract
+Impacket
+In this lab
+NTDS
+The ‘ntds.dit’ file is a Windows Extensible Storage Engine (ESE) file used to store a wide range of information on an Active Directory (AD); it includes all the file hashes for all accounts in the domain. It is typically locked by the operating system so that it cannot be copied; however, there are several techniques that can be used to get a copy of the ESE file. It is also recoverable from backups if required. 
+
+The two primary methods of acquiring a copy of the ‘ntds.dit’ file require administrator privileges. Even with admin-level access it's useful to acquire the 'ntds.dit' file, because knowing passwords for other user accounts can make it easier to pivot or abuse password reuse in other applications. You may also only have local admin access or physical access to the domain controller. 
+
+The ‘ntds.dit’ file cannot be parsed on its own. As with cracking the SAM store, you'll need to acquire the SYSTEM and SECURITY hives.
+
+esedbexport
+'esedbexport' is a tool that will parse and extract tables from an ESE file such as ‘ntds.dit’. The output can then be used with other tools to query the information in each table. Below is an example output of what you should expect. Please note: the -m flag indicates which format the data will be exported as. In this case, we have specified to parse the data into tables.
+
+ntdsxtract
+'ntdsxtract' is a collection of tools designed to query information from the ‘ntds.dit’ file, and it is often used in conjunction with the tables exported by ‘esedbexport’. The following tools may be useful:
+
+dscomputers.py <datatable> <output directory> [option] recovers files about workstations that have connected to the Domain Controller (DC).
+dsdeletedobjects.py <datatable> <output directory> [option] recovers information that has been deleted from ‘ntds.dit’.
+dsfileinformation.py <ntds.dit> recovers information on the DC.
+dsgroups.py <datatable> <linktable> <work directory> [option] displays information on Active Directory Groups.
+dsusers.py <datatable> <linktable> <work directory> [option] recovers individual user information.
+Please note: the --syshive <path to system hive> option is required for password hash and history extraction.
+
+Impacket
+Impacket has several example scripts. These can be used to parse information from local ‘ntds.dit’ files or, with credentials, to attempt to extract directly from a Domain Controller. For example, ‘secretsdump.py’ can be used to dump the password hashes for all the users on the Active Directory.
+
+#esedbexport -m tables ntds.dt
+#secretsdump.py -ntds ntds.dit -system ~/pentest/registry/system LOCAL
